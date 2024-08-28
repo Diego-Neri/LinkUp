@@ -15,7 +15,7 @@ var connectionString = builder.Configuration.GetConnectionString("MariaDB");
 builder.Services.AddDbContext<BancoContext>(options =>
     options.UseMySQL(connectionString));
 
-builder.Services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

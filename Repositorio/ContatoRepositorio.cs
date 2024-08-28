@@ -5,7 +5,7 @@ namespace ControleDeContatos.Repositorio {
     public class ContatoRepositorio : IContatoRepositorio {
         private readonly BancoContext _context;
         public ContatoRepositorio(BancoContext bancoContext) {
-           this._context = bancoContext;
+            this._context = bancoContext;
         }
         public ContatoModel ListarPorId(int id) {
             return _context.Contatos.FirstOrDefault(x => x.Id == id);
