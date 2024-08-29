@@ -16,9 +16,6 @@ namespace ControleDeContatos.Models {
         public string Email { get; set; }
 
         public PerfilEnum Perfil { get; set; }
-        [Required(ErrorMessage = "Digite a senha do usuário")]
-        public string Senha { get; set; }
-        public DateTime DataCadastro { get; set; }
-        public DateTime? DataAtualizacao { get; set; } 
+        
     }
 }

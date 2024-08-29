@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace ControleDeContatos.Repositorio {
     public interface IUsuarioRepositorio {
-        UsuarioModel ListarPorId(int id);
-        List<UsuarioModel> BuscarTodos();
-        UsuarioModel Adicionar(UsuarioModel usuario);
-        UsuarioModel Atualizar(UsuarioModel usuario);
+        UsuarioSemSenhaModel ListarPorId(int id);
+        List<UsuarioSemSenhaModel> BuscarTodos();
+        UsuarioSemSenhaModel Adicionar(UsuarioSemSenhaModel usuario);
+        UsuarioSemSenhaModel Atualizar(UsuarioSemSenhaModel usuario);
 
         bool Apagar(int id);
 

@@ -7,15 +7,15 @@ namespace ControleDeContatos.Repositorio {
         public UsuarioRepositorio(BancoContext bancoContext) {
             this._context = bancoContext;
         }
-        public UsuarioModel ListarPorId(int id) {
+        public UsuarioSemSenhaModel ListarPorId(int id) {
             return _context.Usuarios.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<UsuarioModel> BuscarTodos() {
+        public List<UsuarioSemSenhaModel> BuscarTodos() {
 
             return _context.Usuarios.ToList();
         }
-        public UsuarioModel Adicionar(UsuarioModel usuario) {
+        public UsuarioSemSenhaModel Adicionar(UsuarioSemSenhaModel usuario) {
             //Gravar no banco de dados
             usuario.DataCadastro = DateTime.Now;
             _context.Usuarios.Add(usuario);
@@ -23,14 +23,15 @@ namespace ControleDeContatos.Repositorio {
             return usuario;
         }
 
-        public UsuarioModel Atualizar(UsuarioModel usuario) {
-            UsuarioModel usuarioDB = ListarPorId(usuario.Id);
+        public UsuarioSemSenhaModel Atualizar(UsuarioSemSenhaModel usuario) {
+            UsuarioSemSenhaModel usuarioDB = ListarPorId(usuario.Id);
             if (usuarioDB == null) throw new Exception("Houve um erro na atualização do usuário!");
 
             usuarioDB.Nome = usuario.Nome;
             usuarioDB.Email = usuario.Email;
             usuarioDB.Login = usuario.Login;
             usuarioDB.Perfil = usuario.Perfil;
+            usuarioDB.DataCadastro = DateTime.Now;
             usuarioDB.DataAtualizacao = DateTime.Now;
 
             _context.Usuarios.Update(usuarioDB);
@@ -40,7 +41,7 @@ namespace ControleDeContatos.Repositorio {
         }
 
         public bool Apagar(int id) {
-            UsuarioModel usuarioDB = ListarPorId(id);
+            UsuarioSemSenhaModel usuarioDB = ListarPorId(id);
             if (usuarioDB == null) throw new Exception("Houve um erro ao deletar usuário");
 
             _context.Usuarios.Remove(usuarioDB);
