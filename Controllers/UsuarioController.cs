@@ -10,7 +10,7 @@ namespace ControleDeContatos.Controllers {
             _usuarioRepositorio = usuarioRepositorio;
         }
         public IActionResult Index() {
-            List<UsuarioSemSenhaModel> usuario = _usuarioRepositorio.BuscarTodos();
+            List<UsuarioModel> usuario = _usuarioRepositorio.BuscarTodos();
 
             return View(usuario);
         }
@@ -18,11 +18,11 @@ namespace ControleDeContatos.Controllers {
             return View();
         }
         public IActionResult Editar(int id) {
-            UsuarioSemSenhaModel usuario = _usuarioRepositorio.ListarPorId(id);
+                UsuarioModel usuario = _usuarioRepositorio.ListarPorId(id);
             return View(usuario);
         }
         public IActionResult ApagarConfirmacao(int id) {
-            UsuarioSemSenhaModel usuario = _usuarioRepositorio.ListarPorId(id);
+            UsuarioModel usuario = _usuarioRepositorio.ListarPorId(id);
 
             return View(usuario);
         }
@@ -46,9 +46,8 @@ namespace ControleDeContatos.Controllers {
                 return RedirectToAction("Index");
             }
         }
-
         [HttpPost]
-        public IActionResult Criar(UsuarioSemSenhaModel usuario) {
+        public IActionResult Criar(UsuarioModel usuario) {
             try {
                 if (ModelState.IsValid) {
                     _usuarioRepositorio.Adicionar(usuario);
@@ -63,21 +62,34 @@ namespace ControleDeContatos.Controllers {
             }
         }
         [HttpPost]
-        public IActionResult Editar(UsuarioSemSenhaModel usuario) {
+        public IActionResult Editar(UsuarioSemSenhaModel usuarioSemSenhaModel) {
             try {
+
+                UsuarioModel usuario = null;
+
                 if (ModelState.IsValid) {
-                    _usuarioRepositorio.Atualizar(usuario);
+
+                    usuario = new UsuarioModel() {
+                        Id = usuarioSemSenhaModel.Id,
+                        Nome = usuarioSemSenhaModel.Nome,
+                        Login = usuarioSemSenhaModel.Login,
+                        Email = usuarioSemSenhaModel.Email,
+                        Perfil = usuarioSemSenhaModel.Perfil
+                    };
+
+                    usuario = _usuarioRepositorio.Atualizar(usuario);
                     TempData["MensagemSucesso"] = "Usuário alterado com sucesso!";
                     return RedirectToAction("Index");
                 }
 
-                return View("Editar", usuario);
+                return View(usuario);
 
             } catch (System.Exception erro) {
-                TempData["MensagemErro"] = "Não foi possível alterar seu usuário, tente novamente!" +
+                TempData["MensagemErro"] = "Não foi possível atualizar seu usuário, tente novamente!" +
                     $"detalhe do erro:{erro.Message}";
                 return RedirectToAction("Index");
             }
         }
+
     }
 }
