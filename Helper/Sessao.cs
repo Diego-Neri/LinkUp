@@ -10,7 +10,7 @@ namespace ControleDeContatos.Helper {
         public Sessao(IHttpContextAccessor httpContext) {
             _httpContext = httpContext;
         }
-        public UsuarioModel BuscarSessaoDoUsuario() {
+        public UsuarioModel BuscarSessao() {
             string sessaoUsuario = _httpContext.HttpContext.Session.GetString("sessaoUsuarioLogado");
 
             if (string.IsNullOrEmpty(sessaoUsuario)) return null;
@@ -25,8 +25,8 @@ namespace ControleDeContatos.Helper {
             _httpContext.HttpContext.Session.SetString("sessaoUsuarioLogado",valor);
         }
 
-        public void RemoverSessaoDoUsuario() {
-            _httpContext.HttpContext.Session.Remove("sessaoUsuarioLogado");
+        public void RemoverSessaoUsuario() {
+            _httpContext.HttpContext.Session.Remove("SessaoUsuarioLogado");
         }
     }
 }

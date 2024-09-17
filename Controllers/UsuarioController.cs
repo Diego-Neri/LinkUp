@@ -1,12 +1,8 @@
-﻿using ControleDeContatos.Filters;
-using ControleDeContatos.Models;
+﻿using ControleDeContatos.Models;
 using ControleDeContatos.Repositorio;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeContatos.Controllers {
-
-    [PaginaRestritaSomenteAdmin]
-
     public class UsuarioController : Controller {
 
         private readonly IUsuarioRepositorio _usuarioRepositorio;
