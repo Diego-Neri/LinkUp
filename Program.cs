@@ -20,9 +20,11 @@ builder.Services.AddDbContext<BancoContext>(options =>
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
-builder.Services.AddScoped<IContatoRepositorio, ContatoRepositorio >();
-builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio >();
+builder.Services.AddScoped<IContatoRepositorio, ContatoRepositorio>();
+builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<ISessao, Sessao>();
+builder.Services.AddScoped<IEmail, Email>();
+
 
 builder.Services.AddSession(o => {
     o.Cookie.HttpOnly = true;
