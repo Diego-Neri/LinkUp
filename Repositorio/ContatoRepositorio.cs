@@ -3,17 +3,17 @@ using ControleDeContatos.Models;
 
 namespace ControleDeContatos.Repositorio {
     public class ContatoRepositorio : IContatoRepositorio {
-        private readonly BancoContext _context;
-        public ContatoRepositorio(BancoContext bancoContext) {
+        private readonly BancoContent _context;
+        public ContatoRepositorio(BancoContent bancoContext) {
             this._context = bancoContext;
         }
         public ContatoModel ListarPorId(int id) {
             return _context.Contatos.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<ContatoModel> BuscarTodos() {
+        public List<ContatoModel> BuscarTodos(int usuarioId) {
 
-            return _context.Contatos.ToList();
+            return _context.Contatos.Where(x => x.UsuarioId == usuarioId).ToList();
         }
         public ContatoModel Adicionar(ContatoModel contato) {
             //Gravar no banco de dados
