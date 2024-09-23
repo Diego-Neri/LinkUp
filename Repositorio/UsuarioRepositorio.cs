@@ -3,8 +3,8 @@ using ControleDeContatos.Models;
 
 namespace ControleDeContatos.Repositorio {
     public class UsuarioRepositorio : IUsuarioRepositorio {
-        private readonly BancoContext _context;
-        public UsuarioRepositorio(BancoContext bancoContext) {
+        private readonly BancoContent _context;
+        public UsuarioRepositorio(BancoContent bancoContext) {
             this._context = bancoContext;
         }
         public UsuarioModel BuscarPorLogin(string login) {

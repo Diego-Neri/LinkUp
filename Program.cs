@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("MariaDB");
 
 
-builder.Services.AddDbContext<BancoContext>(options =>
+builder.Services.AddDbContext<BancoContent>(options =>
     options.UseMySQL(connectionString));
 
 
