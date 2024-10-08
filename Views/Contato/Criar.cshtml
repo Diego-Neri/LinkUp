@@ -3,15 +3,10 @@
     ViewData["Title"] = "Criar Contato";
 }
 <div class="text-center">
-
-
     <h1 class="display-4">Cadastrar Contato</h1>
-    
 </div>
 
 <form asp-controller="Contato" asp-action="Criar" method="post">
-    @*para adicionar a validacao dos campos pelo lado do cliente, basta adicionar REQUIRED, nos input*@
-    
     <div class="form-group">
         <label for="nome">Nome</label>
         <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do contato">
@@ -26,11 +21,27 @@
 
     <div class="form-group">
         <label for="celular">Celular</label>
-        <input type="text" asp-for="Celular" class="form-control" placeholder="Digite o celular do contato">
+        <input type="text" asp-for="Celular" class="form-control" placeholder="Digite o celular do contato" oninput="formatarCelular(this)">
         @Html.ValidationMessageFor(x => x.Celular)
     </div>
-    <br/>
+    <br />
 
     <button type="submit" class="btn btn-primary">Adicionar</button>
     <a class="btn btn-secondary" asp-controller="Contato" asp-action="Index" role="button">Voltar</a>
 </form>
+
+<script>
+    function formatarCelular(input) {
+        // Remove caracteres não numéricos
+        let numero = input.value.replace(/\D/g, '');
+
+        // Verifica o tamanho e formata conforme necessário
+        if (numero.length <= 10) {
+            // Formato (XX) XXXX-XXXX
+            input.value = numero.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+        } else {
+            // Formato (XX) XXXXX-XXXX
+            input.value = numero.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        }
+    }
+</script>
