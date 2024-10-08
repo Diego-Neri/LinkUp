@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ControleDeContatos.Repositorio;
 using ControleDeContatos.Helper;
+using ControleDeContatos.Infraestrutura;
 
 
 
@@ -16,7 +17,9 @@ var connectionString = builder.Configuration.GetConnectionString("MariaDB");
 builder.Services.AddDbContext<BancoContent>(options =>
     options.UseMySQL(connectionString));
 
+builder.Services.AddDbContext<ArquivoContext>(options => options.UseMySQL(connectionString));
 
+builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 

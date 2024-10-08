@@ -1,0 +1,33 @@
+﻿<div id="chart_div" style="width: 100%; height: 500px;"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script>
+    // Carregar o pacote corechart
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    // Definir função de callback para desenhar o gráfico
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        // Criação dos dados do gráfico com os dados do ViewBag
+        var data = google.visualization.arrayToDataTable([
+            ['Element', 'Density'],
+            ['Item 1', @ViewBag.Dados[0]],
+            ['Item 2', @ViewBag.Dados[1]],
+            ['Item 3', @ViewBag.Dados[2]],
+            ['Item 4', @ViewBag.Dados[3]]
+        ]);
+
+        // Opções do gráfico
+        var options = {
+            title: 'Gráfico de Exemplo',
+            hAxis: { title: 'Element', titleTextStyle: { color: '#333' } },
+            vAxis: { minValue: 0 }
+        };
+
+        // Criar e desenhar o gráfico na div especificada
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
